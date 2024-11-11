@@ -32,7 +32,7 @@ int main()
     HWND hwnd = CreateWindowEx(
     0,                              // Optional window styles.
     class_name,                     // Window class
-    "mammamia",    // Window text
+    "Game of Life",    // Window text
     WS_OVERLAPPEDWINDOW,            // Window style
 
     // Size and position
@@ -49,4 +49,6 @@ int main()
         return 0;
     }
     ShowWindow(hwnd, SW_SHOW);
+
+    while(true);
 }
