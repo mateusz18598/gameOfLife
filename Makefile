@@ -1,6 +1,7 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++11
+CXXFLAGS = -Wall -Wextra 
+LFLAGS = -lgdi32
 
 # Target executable name
 TARGET = main.exe
@@ -17,7 +18,7 @@ all: $(TARGET)
 
 # Rule to link object files and create the executable
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS) $(LFLAGS)
 
 # Rule to compile .cpp files into .o files
 %.o: %.cpp $(HEADERS)
