@@ -8,7 +8,7 @@ Window::Window()
 
     WNDCLASS wc = { };
 
-    wc.lpfnWndProc   = Window *this.WndProc;
+    wc.lpfnWndProc   = WndProc;
     wc.hInstance     = GetModuleHandle(NULL);
     wc.lpszClassName = class_name;
 
@@ -37,7 +37,7 @@ Window::Window()
     UpdateWindow(hwnd);
 }
 
-LRESULT CALLBACK Window::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch (uMsg)
     {
