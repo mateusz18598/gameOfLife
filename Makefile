@@ -1,7 +1,7 @@
 # Compiler and flags
 CXX = g++
 CXXFLAGS = -Wall -Wextra 
-LFLAGS = -lgdi32
+LFLAGS = -lgdi32 -luser32
 
 # Target executable name
 TARGET = main.exe
