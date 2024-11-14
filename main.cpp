@@ -11,5 +11,6 @@ int main()
 	{
 		if (!GetMessage(&msg, NULL, 0, 0)) break;
 		DispatchMessage(&msg);
+		wnd.Refresh();
 	};
 }

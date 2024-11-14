@@ -1,5 +1,10 @@
 #include "window.h"
 
+void Window::Refresh()
+{
+    InvalidateRect(hwnd, NULL, FALSE);
+    UpdateWindow(hwnd);
+}
 Window::Window()
 {
     // Register the window class.
@@ -14,7 +19,7 @@ Window::Window()
 
     RegisterClass(&wc);
 
-    HWND hwnd = CreateWindowEx(
+    hwnd = CreateWindowEx(
     0,                              // Optional window styles.
     class_name,                     // Window class
     "Game of Life",    // Window text

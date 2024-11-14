@@ -20,12 +20,14 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 static HDC hdc;
 static PAINTSTRUCT ps;
+static HWND hwnd;
 
 class Window
 {
 private:
     public:
         Window();
+        void Refresh();
 };
 
 
