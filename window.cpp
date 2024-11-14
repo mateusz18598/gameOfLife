@@ -62,7 +62,17 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
         static PAINTSTRUCT ps;
         static HDC hdc = BeginPaint(hwnd, &ps);
 
+        // TODO
+        BitBlt(hdc, 
+                ps.rcPaint.left,
+                ps.rcPaint.top,
+                ps.rcPaint.right - ps.rcPaint.left,
+                ps.rcPaint.bottom - ps.rcPaint.top,
+                hdc)
         // All painting occurs here, between BeginPaint and EndPaint.
+
+        EndPaint(hwnd, &ps);
+
         return 0;
     }
     case WM_SIZE:
