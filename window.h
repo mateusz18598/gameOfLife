@@ -7,6 +7,7 @@ using namespace std;
 struct Frame
 {
     int x, y;
+    DWORD *pixels;
 };
 
 

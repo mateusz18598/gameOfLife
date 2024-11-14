@@ -65,6 +65,15 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
         frame.x = LOWORD(lParam);
         frame.y = HIWORD(lParam);
         cout<<frame.x<<" "<<frame.y<<endl;
+
+        bmpinfo.bmiHeader.biWidth = frame.x;
+        bmpinfo.bmiHeader.biHeight = frame.y;
+        static BITMAPINFO bmpinfo;
+
+        if(bitmap) DeleteObject(bitmap);
+        bitmap = CreateDIBitmap(NULL, &bmpinfo.bmiHeader, DIB_RGB_COLORS, &frame.pixels, 0, 0);
+        SelectObject(hdc, bitmap);
+
         return 0;
     }
 
