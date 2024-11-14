@@ -31,7 +31,7 @@ Window::Window()
 
     if (hwnd == NULL)
     {
-        return 0;
+        cout<<"Hwnd = NULL"<<endl;
     }
     ShowWindow(hwnd, SW_SHOW);
     UpdateWindow(hwnd);
