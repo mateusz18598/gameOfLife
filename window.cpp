@@ -2,11 +2,33 @@
 
 void Window::Refresh()
 {
+    if (frame.pixels)
+    {
+        cout << "bitmapa jest" << endl;
+        for(int x=0; x<frame.x/2; x++){
+            for(int y=0; y<frame.y/2; y++){
+                frame.pixels[y*frame.y*4 + x*4] = 0;
+            }
+        }
+    }
     InvalidateRect(hwnd, NULL, FALSE);
     UpdateWindow(hwnd);
 }
 Window::Window()
 {
+    hdc_frame = CreateCompatibleDC(hdc);
+    bmpInfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    bmpInfo.bmiHeader.biWidth = 0;
+    bmpInfo.bmiHeader.biHeight = 0;
+    bmpInfo.bmiHeader.biPlanes = 1;
+    bmpInfo.bmiHeader.biBitCount = 32;
+    bmpInfo.bmiHeader.biCompression = BI_RGB;
+    bmpInfo.bmiHeader.biSizeImage = 0;
+    bmpInfo.bmiHeader.biXPelsPerMeter = 0;
+    bmpInfo.bmiHeader.biYPelsPerMeter = 0;
+    bmpInfo.bmiHeader.biClrUsed = 0;
+    bmpInfo.bmiHeader.biClrImportant = 0;
+
     // Register the window class.
     const char* class_name = "Test";
     const wchar_t CLASS_NAME[]  = L"Sample Window Class";
@@ -54,26 +76,25 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
         return 0;
     }
 
-    case WM_DESTROY:
-        DestroyWindow(hwnd);
-        return 0;
+    // case WM_DESTROY:
+    //     DestroyWindow(hwnd);
+    //     return 0;
 
     case WM_PAINT:
     {
         PAINTSTRUCT ps;
-        HDC hdc = BeginPaint(hwnd, &ps);
+        hdc_frame = BeginPaint(hwnd, &ps);
+        FillRect(hdc_frame, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
+        BitBlt(hdc, 
+                ps.rcPaint.left,
+                ps.rcPaint.top,
+                ps.rcPaint.right - ps.rcPaint.left,
+                ps.rcPaint.bottom -ps.rcPaint.top,
+                hdc_frame,
+                0,
+                0,
+                SRCCOPY);
 
-        // TODO
-        // BitBlt(hdc, 
-        //         ps.rcPaint.left,
-        //         ps.rcPaint.top,
-        //         ps.rcPaint.right - ps.rcPaint.left,
-        //         ps.rcPaint.bottom - ps.rcPaint.top,
-        //         hdc)
-
-
-        // All painting occurs here, between BeginPaint and EndPaint.
-        FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
         EndPaint(hwnd, &ps);
 
         return 0;
@@ -84,13 +105,13 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
         frame.y = HIWORD(lParam);
         cout<<frame.x<<" "<<frame.y<<endl;
 
-        bmpinfo.bmiHeader.biWidth = frame.x;
-        bmpinfo.bmiHeader.biHeight = frame.y;
+        bmpInfo.bmiHeader.biWidth = frame.x;
+        bmpInfo.bmiHeader.biHeight = frame.y;
         static BITMAPINFO bmpinfo;
 
         if(bitmap) DeleteObject(bitmap);
-        bitmap = CreateDIBitmap(NULL, &bmpinfo.bmiHeader, DIB_RGB_COLORS, &frame.pixels, 0, 0);
-        SelectObject(hdc, bitmap);
+        bitmap = CreateDIBitmap(NULL, &bmpinfo.bmiHeader, DIB_RGB_COLORS, &frame.pixels, &bmpInfo, DIB_RGB_COLORS);
+        SelectObject(hdc_frame, bitmap);
 
         return 0;
     }
