@@ -49,15 +49,14 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
     case WM_CLOSE:
     {
-        DestroyWindow(hwnd);
         cout << "WM_CLOSE" << endl;
         PostQuitMessage(0);
         return 0;
     }
 
-    // case WM_DESTROY:
-    //     PostQuitMessage(0);
-    //     return 0;
+    case WM_DESTROY:
+        DestroyWindow(hwnd);
+        return 0;
 
     case WM_PAINT:
     {
@@ -72,7 +71,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
         //         ps.rcPaint.bottom - ps.rcPaint.top,
         //         hdc)
 
-        
+
         // All painting occurs here, between BeginPaint and EndPaint.
         FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
         EndPaint(hwnd, &ps);
