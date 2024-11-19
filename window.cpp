@@ -2,16 +2,16 @@
 
 void Window::Refresh()
 {
-    // for(int x = 0; x<frame.x; x++)
-    // {
-    //     for(int y = 0; y<frame.y; y++)
-    //     {
-    //         frame.pixels[y*sizeof(uint8_t) * 4 + x] = 255;
-    //         frame.pixels[y*sizeof(uint8_t) * 4 + x + 1] = 255;
-    //         frame.pixels[y*sizeof(uint8_t) * 4 + x + 2] = 255;
-    //         frame.pixels[y*sizeof(uint8_t) * 4 + x + 3] = 255;
-    //     }
-    // }
+    for(int x = 0; x<frame.x; x++)
+    {
+        for(int y = 0; y<frame.y; y++)
+        {
+            frame.pixels[x*sizeof(uint8_t) * 4 + y] = 255;
+            frame.pixels[x*sizeof(uint8_t) * 4 + (y + 1)] = 255;
+            frame.pixels[x*sizeof(uint8_t) * 4 + (y + 2)] = 255;
+            frame.pixels[x*sizeof(uint8_t) * 4 + (y + 3)] = 255;
+        }
+    }
 
 
     InvalidateRect(hwnd, NULL, FALSE);
