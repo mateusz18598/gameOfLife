@@ -4,13 +4,15 @@
 
 int main()
 {
-    Window wnd = Window();
+	Window wnd = Window();
 
-    MSG msg;
-	while(1)
+	MSG msg;
+	while (1)
 	{
-		if (!GetMessage(&msg, NULL, 0, 0)) break;
+		if (!GetMessage(&msg, NULL, 0, 0))
+			break;
 		DispatchMessage(&msg);
 		wnd.Refresh();
 	};
+	delete(frame.pixels);
 }
