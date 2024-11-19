@@ -2,6 +2,7 @@
 #include <iostream>
 #include <windows.h>
 #include <wingdi.h>
+#include <algorithm>
 
 using namespace std;
 

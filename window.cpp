@@ -2,9 +2,22 @@
 
 void Window::Refresh()
 {
+    // for(int x = 0; x<frame.x; x++)
+    // {
+    //     for(int y = 0; y<frame.y; y++)
+    //     {
+    //         frame.pixels[y*sizeof(uint8_t) * 4 + x] = 255;
+    //         frame.pixels[y*sizeof(uint8_t) * 4 + x + 1] = 255;
+    //         frame.pixels[y*sizeof(uint8_t) * 4 + x + 2] = 255;
+    //         frame.pixels[y*sizeof(uint8_t) * 4 + x + 3] = 255;
+    //     }
+    // }
+
+
     InvalidateRect(hwnd, NULL, FALSE);
     UpdateWindow(hwnd);
 }
+
 
 Window::Window()
 {
@@ -95,7 +108,6 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
             cout << "nie ma frame.pixels" << endl;
         }
 
-        FillRect(hdc, &rect, (HBRUSH)(COLOR_WINDOW + 1));  
 
         EndPaint(hwnd, &ps);
 
@@ -111,6 +123,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
          
         if (frame.pixels) delete(frame.pixels);
         frame.pixels = new uint8_t[frame.x * frame.y * 4];
+        
+        // fill(frame.pixels, frame.x * frame.y, frame.x * frame.y * 4, 255);
 
         return 0;
     }
