@@ -3,7 +3,6 @@
 #include <windows.h>
 #include <wingdi.h>
 #include <algorithm>
-
 #include "render.h"
 
 using namespace std;

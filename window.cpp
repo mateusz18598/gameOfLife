@@ -11,7 +11,7 @@ void Window::Refresh()
             col.g = 255;
             col.b = 255;
             col.a = 255;
-            frame.pixels[frame.y * y + x] = col;
+            frame.pixels[frame.x * y + x] = col;
         }
     }
 
