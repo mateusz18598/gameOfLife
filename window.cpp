@@ -6,10 +6,12 @@ void Window::Refresh()
     {
         for(int y = 0; y<frame.y; y++)
         {
-            frame.pixels[y*sizeof(uint8_t) * 4 + x] = 255;
-            frame.pixels[y*sizeof(uint8_t) * 4 + (x + 1)] = 255;
-            frame.pixels[y*sizeof(uint8_t) * 4 + (x + 2)] = 255;
-            frame.pixels[y*sizeof(uint8_t) * 4 + (x + 3)] = 255;
+            RGBA col = frame.pixels[frame.y * y + x];
+            col.r = 255;
+            col.g = 255;
+            col.b = 255;
+            col.a = 255;
+            frame.pixels[frame.y * y + x] = col;
         }
     }
 
@@ -122,7 +124,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
         bmpInfo.bmiHeader.biHeight = frame.y;
          
         if (frame.pixels) delete(frame.pixels);
-        frame.pixels = new uint8_t[frame.x * frame.y * 4];
+        frame.pixels = new RGBA[frame.x * frame.y];
         
         // fill(frame.pixels, frame.x * frame.y, frame.x * frame.y * 4, 255);
 

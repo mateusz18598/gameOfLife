@@ -4,12 +4,14 @@
 #include <wingdi.h>
 #include <algorithm>
 
+#include "render.h"
+
 using namespace std;
 
 struct Frame
 {
     int x, y;
-    uint8_t *pixels = 0;
+    RGBA *pixels = 0;
 };
 
 static BITMAPINFO bmpInfo;
