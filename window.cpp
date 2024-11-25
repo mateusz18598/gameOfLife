@@ -2,18 +2,25 @@
 
 void Window::Refresh()
 {
-    for(int x = 0; x<frame.width; x++)
-    {
-        for(int y = 0; y<frame.height; y++)
-        {
-            RGBA col;
-            col.r = 255;
-            col.g = 255;
-            col.b = 255;
-            col.a = 255;
-            frame.pixels[(frame.width * y) + x] = col;
-        }
-    }
+    // for(int x = 0; x<frame.width; x++)
+    // {
+    //     for(int y = 0; y<frame.height; y++)
+    //     {
+    //         RGBA col;
+    //         col.r = 255;
+    //         col.g = 255;
+    //         col.b = 255;
+    //         col.a = 255;
+    //         frame.pixels[(frame.width * y) + x] = col;
+    //     }
+    // }
+    //cout << "frame.width = " << frame.width << "frame.height = " << frame.height << endl;
+    RGBA col;
+    col.r = 155;
+    col.g = 200;
+    col.b = 100;
+    col.a = 20;
+    fill(100, 100, 200, 200, col);
 
 
     InvalidateRect(hwnd, NULL, FALSE);
@@ -21,7 +28,7 @@ void Window::Refresh()
 }
 
 
-Window::Window()
+void Window::Init()
 {
     bmpInfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
     bmpInfo.bmiHeader.biWidth = 0;
@@ -119,6 +126,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     {
         frame.width = LOWORD(lParam);
         frame.height = HIWORD(lParam);
+        //cout << "frame.width = " << frame.width << "frame.height = " << frame.height << endl;
+
 
         bmpInfo.bmiHeader.biWidth = frame.width;
         bmpInfo.bmiHeader.biHeight = frame.height;

@@ -1,5 +1,6 @@
-#pragma once 
+#include "types.h"
 
-struct RGBA {
-    unsigned char r, g, b, a;
-};
+
+void fill(int x1, int y1, int x2, int y2, RGBA col); 
+
+inline void setPixel( int x, int y);

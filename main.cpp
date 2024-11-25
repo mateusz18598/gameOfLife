@@ -4,7 +4,7 @@
 
 int main()
 {
-	//window = Window();
+	window.Init();
 
 	MSG msg;
 	while (1)

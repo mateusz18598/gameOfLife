@@ -1,4 +1,7 @@
-#pragma once
+ #ifndef WINDOW
+ #define WINDOW
+
+
 #include <iostream>
 #include <windows.h>
 #include <wingdi.h>
@@ -7,11 +10,7 @@
 
 using namespace std;
 
-struct Frame
-{
-    int width, height;
-    RGBA *pixels = 0;
-};
+
 
 static BITMAPINFO bmpInfo;
 static HBITMAP bitmap = 0;
@@ -26,7 +25,9 @@ class Window
 {
 private:
 public:
-    Window();
+    void Init();
     void Refresh();
 };
 static Window window;
+
+#endif
