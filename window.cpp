@@ -2,16 +2,16 @@
 
 void Window::Refresh()
 {
-    for(int x = 0; x<frame.x; x++)
+    for(int x = 0; x<frame.width; x++)
     {
-        for(int y = 0; y<frame.y; y++)
+        for(int y = 0; y<frame.height; y++)
         {
-            RGBA col = frame.pixels[frame.y * y + x];
+            RGBA col;
             col.r = 255;
             col.g = 255;
             col.b = 255;
             col.a = 255;
-            frame.pixels[frame.x * y + x] = col;
+            frame.pixels[(frame.width * y) + x] = col;
         }
     }
 
@@ -117,16 +117,16 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     }
     case WM_SIZE:
     {
-        frame.x = LOWORD(lParam);
-        frame.y = HIWORD(lParam);
+        frame.width = LOWORD(lParam);
+        frame.height = HIWORD(lParam);
 
-        bmpInfo.bmiHeader.biWidth = frame.x;
-        bmpInfo.bmiHeader.biHeight = frame.y;
+        bmpInfo.bmiHeader.biWidth = frame.width;
+        bmpInfo.bmiHeader.biHeight = frame.height;
          
         if (frame.pixels) delete(frame.pixels);
-        frame.pixels = new RGBA[frame.x * frame.y];
+        frame.pixels = new RGBA[frame.width * frame.height];
         
-        // fill(frame.pixels, frame.x * frame.y, frame.x * frame.y * 4, 255);
+        window.Refresh();
 
         return 0;
     }

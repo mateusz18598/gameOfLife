@@ -4,7 +4,7 @@
 
 int main()
 {
-	Window wnd = Window();
+	//window = Window();
 
 	MSG msg;
 	while (1)
@@ -12,7 +12,7 @@ int main()
 		if (!GetMessage(&msg, NULL, 0, 0))
 			break;
 		DispatchMessage(&msg);
-		wnd.Refresh();
+		window.Refresh();
 	};
 	delete(frame.pixels);
 }
