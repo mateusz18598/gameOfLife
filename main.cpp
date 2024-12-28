@@ -1,11 +1,10 @@
-#include "window.h"
 
+#include "window.h"
+static Window window;
 #define UNICODE
 
 int main()
 {
-	window.Init();
-
 	MSG msg;
 	while (1)
 	{
@@ -14,5 +13,4 @@ int main()
 		DispatchMessage(&msg);
 		window.Refresh();
 	};
-	delete(frame.pixels);
 }

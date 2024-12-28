@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS =# -Wall -Wextra 
+CXXFLAGS =-g -O0 -pedantic
 LFLAGS = -lgdi32 -luser32
 
 # Target executable name
